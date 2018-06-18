@@ -1,0 +1,44 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          version="2.0">
+    <html>
+    <head><title>Books</title></head>
+    <body>
+    <div>
+        <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+        <jsp:output omit-xml-declaration="yes"/>
+
+        <h2>Books List</h2>
+
+        <c:if test="${not empty message}">
+            <div id="message">${message}</div>
+        </c:if>
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Readed</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${books}" var="book">
+                    <tr>
+                        <td><a href="/books/${book.id}">${book.title}</a></td>
+                        <td>${book.author}</td>
+                        <td>${book.read_already ? "Yes" : "No"}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <button>
+            <span><a href="/books?form">Create new</a></span>
+        </button>
+    </div>
+    </body>
+    </html>
+</jsp:root>

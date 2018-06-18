@@ -1,0 +1,79 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          version="2.0" xmlns:form="http://www.springframework.org/tags/form">
+    <html>
+    <head><title>Books</title></head>
+    <body>
+    <div>
+        <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+        <jsp:output omit-xml-declaration="yes"/>
+
+
+
+        <h2>${empty book.id ? "Edit" : "Cteate new"} Book</h2>
+
+        <c:if test="${not empty message}">
+            <div id="message">${message}</div>
+
+        </c:if>
+        <div>
+            <form:form modelAttribute="book" method="post">
+
+
+                <form:label path="title">
+                    Title
+                </form:label>
+                <form:input path="title" />
+                <div>
+                    <form:errors path="title" cssClass="error" />
+                </div>
+                <p/>
+
+                <form:label path="author">
+                    Author
+                </form:label>
+                <form:input path="author" readonly="${not empty books.id}"/>
+                <div>
+                    <form:errors path="author" cssClass="error" />
+                </div>
+                <p/>
+
+                <form:label path="isbn">
+                    ISBN
+                </form:label>
+                <form:input path="isbn"/>
+                <div>
+                    <form:errors path="isbn" cssClass="error" />
+                </div>
+                <p/>
+
+                <form:label path="print_year">
+                    Print year
+                </form:label>
+                <form:input path="print_year"/>
+                <div>
+                    <form:errors path="print_year" cssClass="error" />
+                </div>
+                
+                <form:textarea cols="60" rows="8" path="description"/>
+                <div>
+                    <form:errors path="description" cssClass="error" />
+                </div>
+                <p/>
+                <button>
+                    <span><a href="/books" >Back</a></span>
+                </button>
+                <button type="submit">
+                    <span>Save</span>
+                </button>
+                <button type="reset">
+                    <span>Reset</span>
+                </button>
+            </form:form>
+        </div>
+    </div>
+    </body>
+    </html>
+</jsp:root>

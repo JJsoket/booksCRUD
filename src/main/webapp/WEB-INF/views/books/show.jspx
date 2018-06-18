@@ -1,0 +1,65 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          version="2.0">
+    <html>
+    <head><title>Books</title></head>
+    <body>
+    <div>
+        <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+        <jsp:output omit-xml-declaration="yes"/>
+
+        <h2>Book view</h2>
+
+        <c:if test="${not empty message}">
+            <div id="message">${message}</div>
+        </c:if>
+
+        <c:if test="${not empty book}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Descriptoin</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Pring year</th>
+                    <th>Readed</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.isbn}</td>
+                    <td>${book.print_year}</td>
+                    <td>${book.read_already}</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>${book.description}</p>
+            <div>
+                <button>
+                    <span><a href="/books">Back</a></span>
+                </button>
+                <button>
+                    <span><a href="/books/${book.id}?form">Edit</a></span>
+                </button>
+                <button>
+                    <span><a href="/books/${book.id}?delete">Delete</a></span>
+                </button>
+                <c:if test="${not book.read_already}">
+                    <button>
+                        <span><a href="/books/${book.id}?read">Read this book</a></span>
+                    </button>
+                </c:if>
+            </div>
+        </c:if>
+        <c:if test="${empty book}">
+            <h3>No book with same id</h3>
+        </c:if>
+    </div>
+    </body>
+    </html>
+</jsp:root>
